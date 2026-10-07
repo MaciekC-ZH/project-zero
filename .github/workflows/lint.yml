@@ -1,0 +1,25 @@
+name: First workflow
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kopiowanie repo
+        uses: actions/checkout@v4
+
+      - name: Instalacja Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalacja lintera HTMLHint
+        run: npm install -g htmlhint
+
+      - name: Skanowanie kodu HTML
+        run: htmlhint "**/*.html"
